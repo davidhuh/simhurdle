@@ -1,8 +1,11 @@
+### Example R code for using the simhurdle() function to zero-altered data
+### from fitted hurdle model estimates
+
 library(devtools)
 library(glmmADMB)
 
 
-## Load function for simulating zero-altered data from fitted hurdle model estimates
+## Load the simhurdle() function from github 
 source_url("https://raw.github.com/davidhuh/simhurdle/master/simhurdle.R")
 
 ### Example:
@@ -47,7 +50,7 @@ pred.df <- data.frame(id=id, day=day, dayofwk=dayofwk, dmqsoc=dmqsoc, cycPha=cyc
                       weekdayThu=weekdayThu, weekdayFri=weekdayFri, weekdaySat=weekdaySat)
 
 ## Load fitted model estimates
-load("modelfit.Rdata")
+load(url("https://raw.github.com/davidhuh/simhurdle/master/modelfit.Rdata"))
 
 y.sim <- simulate.hurdle(data=pred.df,
                          formula.fe.bin= ~dmqsoc*(weekdayMon + weekdayTue + weekdayWed + weekdayThu + weekdayFri + weekdaySat),
@@ -84,7 +87,7 @@ dash.sim.df <- within(dash.sim.df, {
 dash.sim.bin.df <- dash.sim.df
 dash.sim.cnt.df <- dash.sim.df[!is.na(dash.sim.df$dv.cnt), ]
 
-##### Fit model to simulated data
+##### Fit model in glmmADMB to simulated data
 
 bin.sim.model <- glmmadmb(dv.bin ~ dmqsoc*(weekdayMon + weekdayTue + weekdayWed + weekdayThu + weekdayFri + weekdaySat) + (1|id),
                       data=dash.sim.bin.df,
