@@ -19,7 +19,7 @@ id      <- rep(1:n.id, each=n.clust)
 day     <- rep(0:(n.clust-1), times=n.id)
 dayofwk <- rep(rep(0:6, length.out=30), length.out=N.obs)
 
-# randomized vector of covariate values
+## randomly sample covariate values
 dmqsoc.cf <- c(-2.63, -2.19, -1.97, -1.75, -1.53, -1.31, -1.09, -0.87, -0.65,
                -0.43, -0.21, 0.01, 0.23, 0.45, 0.67, 0.88, 1.10, 1.32, 1.54)
 
@@ -79,10 +79,11 @@ vcov.beta.bin <- matrix(c( 0.0216354681,  2.534447e-04,  1.809076e-03,  6.294931
                         byrow=TRUE,
                         dimnames=list(beta.bin.names, beta.bin.names))
 
+beta.cnt.names <- c("(Intercept)", "dmqsoc", "cycPha", "cycAmp", "dmqsoc:cycPha", "dmqsoc:cycAmp")
+
 beta.cnt <- c(1.152691622, 0.203528654, -0.206173030, -0.206259375, 0.113605291, -0.003125211)
 names(beta.cnt) <- beta.cnt.names
 
-beta.cnt.names <- c("(Intercept)", "dmqsoc", "cycPha", "cycAmp", "dmqsoc:cycPha", "dmqsoc:cycAmp")
 vcov.beta.cnt <- matrix(c( 2.065793e-03, -1.919220e-04,  1.603239e-04,  9.402623e-05, -8.099336e-05,  1.858301e-05,
                           -1.919220e-04,  2.052724e-03, -8.969975e-05,  0.000000e+00,  1.864548e-04,  1.006906e-04,
                            1.603239e-04, -8.969975e-05,  1.489420e-03,  9.377653e-05, -2.436334e-04, -6.249133e-07,
@@ -93,8 +94,8 @@ vcov.beta.cnt <- matrix(c( 2.065793e-03, -1.919220e-04,  1.603239e-04,  9.402623
                         byrow=TRUE,
                         dimnames=list(beta.cnt.names, beta.cnt.names))
 
-re.cnt.names <- "(Intercept)"
-vcov.id.bin <- matrix(0.94573, dimnames=list(re.cnt.names, re.cnt.names))
+re.bin.names <- "(Intercept)"
+vcov.id.bin <- matrix(0.94573, dimnames=list(re.bin.names, re.bin.names))
 
 re.cnt.names <- c("(Intercept)","cycPha","cycAmp")
 vcov.id.cnt <- matrix(c(0.178290, 0.000000, 0.000000,
