@@ -1,5 +1,5 @@
 ### Description:
-##    Simulate zero-altered data based on a hurdle model
+##    Simulate zero-altered response data based on a hurdle model
 ##
 ###  Original Author: David Huh
 ##
@@ -20,16 +20,18 @@
 ##                      od.cnt = mean estimate of negative binomial overdispersion parameter
 ##                    link.cnt = link function ("log")
 ##
-###  Values:  a vector of simulations
+###  Values:  a vector of simulated zero-altered count responses
 ##
 #
 
-simulate.hurdle <- function(data,
-                            formula.fe.bin, formula.fe.cnt, formula.re.bin, formula.re.cnt,
-                            coef.fe.bin, coef.fe.cnt,
-                            vcov.fe.bin, vcov.fe.cnt, vcov.re.bin, vcov.re.cnt,
-                            dist.cnt="xtnb",
-                            od.cnt, link.bin="logit", link.cnt="log", idvar="id") {
+simhurdle <- function(data,
+                      formula.fe.bin, formula.fe.cnt, formula.re.bin, formula.re.cnt,
+                      coef.fe.bin, coef.fe.cnt,
+                      vcov.fe.bin, vcov.fe.cnt, vcov.re.bin, vcov.re.cnt,
+                      dist.cnt="xtnb",
+                      od.cnt, link.bin="logit", link.cnt="log", idvar="id") {
+  
+  ## Load libraries for random generation from the random effect and outcome distributions
   require(aster, quietly=TRUE)
   require(MASS, quietly=TRUE)
   
